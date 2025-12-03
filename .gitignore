@@ -1,6 +1,7 @@
 mcc\staticfiles\vendors
 
 local-cdn/
+staticfiles/
 
 venv/
 # Byte-compiled / optimized / DLL files
