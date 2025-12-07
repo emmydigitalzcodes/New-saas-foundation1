@@ -11,9 +11,36 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 from decouple import config
 from pathlib import Path
+import logging
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Email Configuration
+EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST=config("EMAIL_HOST", default="smtp.gmail.com")
+EMAIL_PORT=config("EMAIL_PORT", cast=int, default=587)
+EMAIL_HOST_USER=config("EMAIL_HOST_USER", cast=str, default="")
+EMAIL_HOST_PASSWORD=config("EMAIL_HOST_PASSWORD", cast=str, default="")
+EMAIL_USE_TLS=config("EMAIL_USE_TLS", cast=bool, default=True)
+EMAIL_USE_SSL=config("EMAIL_USE_SSL", cast=bool, default=False)
+
+
+ADMIN_USER_NAME = config("ADMIN_USER_NAME", default="Admin user")
+ADMIN_USER_EMAIL = config("ADMIN_USER_EMAIL", default=None)
+
+MANAGERS = []
+ADMINS = []
+
+if all([ADMIN_USER_NAME, ADMIN_USER_EMAIL]):
+    ADMINS +=[
+        (f'{ADMIN_USER_NAME}', f'{ADMIN_USER_EMAIL}'),
+    ]
+    MANAGERS = ADMINS
+
+
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -47,10 +74,22 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
+    #my-apps
     'core',
     'commando',
+    #'auth',
+    #third-party
+    "allauth_ui",
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
+    "widget_tweaks",
+    "slippers",
 ]
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -60,6 +99,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -76,10 +116,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
             ],
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'emmyhome.wsgi.application'
 
@@ -127,6 +169,31 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+#Django-alluth configuration
+LOGIN_REDIRECT_URL = "/"
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "[MCC] "
+ACCOUNT_EMAIL_REQUIRED = True
+
+
+AUTHENTICATION_BACKENDS = [
+    #...
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+    #...
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'github': {
+        'VERIFIED_EMAIL': True,
+    }
+}
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
@@ -172,3 +239,4 @@ STORAGES = {
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
