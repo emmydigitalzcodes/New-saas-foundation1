@@ -1,0 +1,163 @@
+# mcc/templates/components.yaml
+components:
+  # ===== BUTTONS =====
+  button:
+    template: "components/button.html"
+    attrs:
+      type: "button"
+      variant: "primary"  # primary, secondary, success, danger, warning, info
+      size: "medium"      # small, medium, large
+      disabled: false
+      full_width: false
+      loading: false
+  
+  # ===== CARDS =====
+  card:
+    template: "components/card.html"
+    attrs:
+      title: ""
+      subtitle: ""
+      variant: "default"  # default, elevated, bordered, ghost
+      header: true
+      footer: true
+      padded: true
+  
+  # ===== ALERTS & NOTIFICATIONS =====
+  alert:
+    template: "components/alert.html"
+    attrs:
+      type: "info"        # info, success, warning, danger
+      title: ""
+      dismissible: true
+      icon: true
+  
+  toast:
+    template: "components/toast.html"
+    attrs:
+      type: "info"
+      message: ""
+      duration: 5000
+  
+  # ===== BADGES & TAGS =====
+  badge:
+    template: "components/badge.html"
+    attrs:
+      type: "default"     # default, primary, success, danger, warning, info
+      size: "medium"      # small, medium, large
+      rounded: true
+  
+  tag:
+    template: "components/tag.html"
+    attrs:
+      removable: false
+      size: "medium"
+  
+  # ===== FORMS =====
+  input:
+    template: "components/input.html"
+    attrs:
+      type: "text"
+      placeholder: ""
+      size: "medium"
+      disabled: false
+      required: false
+  
+  textarea:
+    template: "components/textarea.html"
+    attrs:
+      rows: 4
+      placeholder: ""
+      disabled: false
+  
+  select:
+    template: "components/select.html"
+    attrs:
+      options: []  # List of (value, label) tuples
+      placeholder: "Select an option"
+      size: "medium"
+  
+  checkbox:
+    template: "components/checkbox.html"
+    attrs:
+      label: ""
+      checked: false
+      disabled: false
+  
+  radio:
+    template: "components/radio.html"
+    attrs:
+      label: ""
+      checked: false
+      disabled: false
+  
+  # ===== LAYOUT =====
+  container:
+    template: "components/container.html"
+    attrs:
+      max_width: "7xl"  # sm, md, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, 7xl, full
+      padded: true
+  
+  divider:
+    template: "components/divider.html"
+    attrs:
+      text: ""
+      orientation: "horizontal"  # horizontal, vertical
+  
+  # ===== NAVIGATION =====
+  breadcrumb:
+    template: "components/breadcrumb.html"
+    attrs:
+      items: []  # List of (label, url) tuples
+  
+  pagination:
+    template: "components/pagination.html"
+    attrs:
+      current_page: 1
+      total_pages: 1
+      show_numbers: true
+  
+  # ===== DATA DISPLAY =====
+  table:
+    template: "components/table.html"
+    attrs:
+      headers: []
+      rows: []
+      striped: true
+      hoverable: true
+  
+  avatar:
+    template: "components/avatar.html"
+    attrs:
+      src: ""
+      alt: ""
+      size: "medium"
+      rounded: true
+  
+  # ===== FEEDBACK =====
+  spinner:
+    template: "components/spinner.html"
+    attrs:
+      size: "medium"
+      color: "primary"
+  
+  skeleton:
+    template: "components/skeleton.html"
+    attrs:
+      type: "text"  # text, circle, rectangle
+      width: "100%"
+      height: "20px"
+  
+  # ===== OVERLAYS =====
+  modal:
+    template: "components/modal.html"
+    attrs:
+      title: ""
+      open: false
+      size: "medium"
+  
+  drawer:
+    template: "components/drawer.html"
+    attrs:
+      title: ""
+      open: false
+      position: "right"  # left, right, top, bottom

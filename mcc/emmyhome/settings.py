@@ -79,6 +79,8 @@ INSTALLED_APPS = [
     #my-apps
     'core',
     'commando',
+    'profile',
+    'subscriptions',
     #'auth',
     #third-party
     "allauth_ui",
@@ -171,10 +173,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 #Django-alluth configuration
 LOGIN_REDIRECT_URL = "/"
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_LOGIN_METHODS = {'email', 'username'}
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username', 'password1*', 'password2*']
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[MCC] "
-ACCOUNT_EMAIL_REQUIRED = True
+
 
 
 AUTHENTICATION_BACKENDS = [
