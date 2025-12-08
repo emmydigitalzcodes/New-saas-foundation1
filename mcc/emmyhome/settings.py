@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     #my-apps
     'core',
     'commando',
+    'customers',
     'profile',
     'subscriptions',
     #'auth',
