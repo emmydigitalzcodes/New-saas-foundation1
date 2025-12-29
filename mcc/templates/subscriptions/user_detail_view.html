@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+<title>{% block head_title %}Your Subscription - {{ block.super }}{% endblock head_title %}</title>
+
+
+{% block content %}
+
+
+<h1 class="text-lg font-medium">Your Subscription</h1>
+<form action="" method= "POST">{% csrf_token %}
+    <button type= "submit">Refresh</button>
+</form>
+
+{% for k, v in subscription.items %}
+<p>{{ k }}: {{ v }}</p>
+{% endfor %}
+
+{% endblock content %}
